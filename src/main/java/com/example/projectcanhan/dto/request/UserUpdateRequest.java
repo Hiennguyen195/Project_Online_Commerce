@@ -2,21 +2,13 @@ package com.example.projectcanhan.dto.request;
 
 import java.time.LocalDate;
 
-public class UserCreationRequest {
+public class UserUpdateRequest {
 
-    private String userName;
     private String password;
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getPassword() {
         return password;
