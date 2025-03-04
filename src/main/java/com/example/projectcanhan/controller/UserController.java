@@ -1,9 +1,11 @@
 package com.example.projectcanhan.controller;
 
+import com.example.projectcanhan.dto.request.ApiResponse;
 import com.example.projectcanhan.dto.request.UserCreationRequest;
 import com.example.projectcanhan.dto.request.UserUpdateRequest;
 import com.example.projectcanhan.entity.User;
 import com.example.projectcanhan.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +20,17 @@ public class UserController {
     @Autowired
     private DataSourceTransactionManager dataSourceTransactionManager;
 
+//    @PostMapping
+//    User createUser(@RequestBody @Valid UserCreationRequest request) {
+//        return userService.createUser(request);
+//    }
+
     @PostMapping
-    User createUser(@RequestBody UserCreationRequest request) {
-        return userService.createUser(request);
+    ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request) {
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+
+        apiResponse.setResult(userService.createUser(request));
+        return apiResponse;
     }
 
     @GetMapping
