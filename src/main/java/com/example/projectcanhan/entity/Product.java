@@ -18,6 +18,10 @@ public class Product {
     @Column(nullable = false)
     private int productStock;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+
     public long getProductId() {
         return productId;
     }
@@ -56,6 +60,14 @@ public class Product {
 
     public void setProductStock(int productStock) {
         this.productStock = productStock;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }

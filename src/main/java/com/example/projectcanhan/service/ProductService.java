@@ -1,10 +1,13 @@
 package com.example.projectcanhan.service;
 
 import com.example.projectcanhan.dto.request.ProductCreationRequest;
+import com.example.projectcanhan.dto.request.ProductDTO;
 import com.example.projectcanhan.dto.request.ProductUpdateRequest;
+import com.example.projectcanhan.entity.Category;
 import com.example.projectcanhan.entity.Product;
 import com.example.projectcanhan.exception.AppException;
 import com.example.projectcanhan.exception.ErrorCode;
+import com.example.projectcanhan.repository.CategoryRepository;
 import com.example.projectcanhan.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +19,14 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    public Product createProduct(ProductCreationRequest request) {
+    public ProductDTO createProduct(ProductCreationRequest request) {
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_FOUND));
+
+
         Product product = new Product();
 
         if (productRepository.existsByProductName(request.getProductName())) {
@@ -28,8 +37,10 @@ public class ProductService {
         product.setProductPrice(request.getProductPrice());
         product.setProductDescription(request.getProductDescription());
         product.setProductStock(request.getProductStock());
+        product.setCategory(category);
 
-        return productRepository.save(product);
+        Product savedProduct = productRepository.save(product);
+        return new ProductDTO(savedProduct);
     }
 
     public Product updateProduct(String productId, ProductUpdateRequest request) {
@@ -52,6 +63,10 @@ public class ProductService {
 
     public void deleteProduct(String productId){
         productRepository.deleteById(Long.valueOf(productId));
+    }
+
+    public List<Product> getProductsByCategory(String categoryId) {
+        return productRepository.findByCategory_CategoryId(Long.valueOf(categoryId));
     }
 
 

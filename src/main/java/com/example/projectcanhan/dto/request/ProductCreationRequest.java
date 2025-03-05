@@ -1,5 +1,7 @@
 package com.example.projectcanhan.dto.request;
 
+import com.example.projectcanhan.entity.Category;
+
 import java.math.BigDecimal;
 
 public class ProductCreationRequest {
@@ -8,6 +10,7 @@ public class ProductCreationRequest {
     private String productDescription;
     private BigDecimal productPrice;
     private int productStock;
+    private Long categoryId;
 
     public String getProductName() {
         return productName;
@@ -39,6 +42,14 @@ public class ProductCreationRequest {
 
     public void setProductStock(int productStock) {
         this.productStock = productStock;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategory(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
 }

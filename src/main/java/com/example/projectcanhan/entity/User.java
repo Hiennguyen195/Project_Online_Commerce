@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String Id;
     private String userName;
     private String password;
     private String firstName;
@@ -17,11 +17,11 @@ public class User {
     private LocalDate birthDate;
 
     public String getId() {
-        return id;
+        return Id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getUserName() {

@@ -1,8 +1,8 @@
 package com.example.projectcanhan.controller;
 
-import com.example.projectcanhan.dto.request.ProductCreationRequest;
-import com.example.projectcanhan.dto.request.ProductUpdateRequest;
+import com.example.projectcanhan.dto.request.*;
 import com.example.projectcanhan.entity.Product;
+import com.example.projectcanhan.entity.User;
 import com.example.projectcanhan.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,16 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+//    @PostMapping
+//    ProductDTO createProduct(@RequestBody  ProductCreationRequest request) {
+//        return productService.createProduct(request);
+//    }
     @PostMapping
-    Product createProduct(@RequestBody @Valid ProductCreationRequest request) {
-        return productService.createProduct(request);
+    ApiResponse<ProductDTO> createProduct(@RequestBody @Valid ProductCreationRequest request) {
+        ApiResponse<ProductDTO> apiResponse = new ApiResponse<>();
+
+        apiResponse.setResult(productService.createProduct(request));
+        return apiResponse;
     }
 
     @PutMapping("/{productId}")

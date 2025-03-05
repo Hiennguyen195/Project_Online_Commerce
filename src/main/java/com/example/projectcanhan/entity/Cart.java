@@ -1,9 +1,9 @@
 package com.example.projectcanhan.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Cart {
@@ -11,11 +11,13 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cartId;
 
-    public long getCartId() {
-        return cartId;
-    }
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
-    public void setCartId(long cartId) {
-        this.cartId = cartId;
-    }
+    @ManyToMany
+    @JoinTable(name = "cart_products",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> products = new HashSet<>();
 }
