@@ -7,8 +7,7 @@ public class ProductCreationRequest {
     private String productName;
     private String productDescription;
     private BigDecimal productPrice;
-    private String productCategory;
-
+    private int productStock;
 
     public String getProductName() {
         return productName;
@@ -34,11 +33,12 @@ public class ProductCreationRequest {
         this.productPrice = productPrice;
     }
 
-    public String getProductCategory() {
-        return productCategory;
+    public int getProductStock() {
+        return productStock;
     }
 
-    public void setProductCategory(String productCategory) {
-        this.productCategory = productCategory;
+    public void setProductStock(int productStock) {
+        this.productStock = productStock;
     }
+
 }

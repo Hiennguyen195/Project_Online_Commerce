@@ -25,6 +25,11 @@ public class ProductController {
         return productService.updateProduct(productId, request);
     }
 
+    @GetMapping
+    Iterable<Product> getProducts() {
+        return productService.getProducts();
+    }
+
     @GetMapping("/{productId}")
     Product getProduct(@PathVariable("productId") String productId) {
         return productService.getProductById(productId);

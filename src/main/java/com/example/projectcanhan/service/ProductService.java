@@ -9,6 +9,8 @@ import com.example.projectcanhan.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -25,7 +27,7 @@ public class ProductService {
         product.setProductName(request.getProductName());
         product.setProductPrice(request.getProductPrice());
         product.setProductDescription(request.getProductDescription());
-        product.setProductCategory(request.getProductCategory());
+        product.setProductStock(request.getProductStock());
 
         return productRepository.save(product);
     }
@@ -35,16 +37,21 @@ public class ProductService {
 
         product.setProductPrice(request.getProductPrice());
         product.setProductDescription(request.getProductDescription());
+        product.setProductStock(request.getProductStock());
         return productRepository.save(product);
     }
 
+    public Iterable<Product> getProducts(){
+        return productRepository.findAll();
+    }
+
     public Product getProductById(String productId) {
-        return productRepository.findById(productId)
+        return productRepository.findById(Long.valueOf(productId))
                 .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
     }
 
     public void deleteProduct(String productId){
-        productRepository.deleteById(productId);
+        productRepository.deleteById(Long.valueOf(productId));
     }
 
 

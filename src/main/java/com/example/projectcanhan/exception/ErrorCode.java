@@ -6,7 +6,9 @@ public enum ErrorCode {
     USER_NOT_FOUND(1002, "User Not Found"),
     INVALID_REQUEST(1003, "Invalid Request"),
     PRODUCT_EXISTS(1004, "Product Already Exists"),
-    PRODUCT_NOT_FOUND(1005, "Product Not Found");
+    PRODUCT_NOT_FOUND(1005, "Product Not Found"),
+    CATEGORY_NOT_FOUND(1006, "Category Not Found"),
+    CATEGORY_EXISTS(1007, "Category Already Exists");
 
     ErrorCode(int code, String message) {
         this.code = code;

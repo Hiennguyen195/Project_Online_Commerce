@@ -6,7 +6,7 @@ public class ProductUpdateRequest {
 
     private String productDescription;
     private BigDecimal productPrice;
-
+    private int productStock;
 
 
     public String getProductDescription() {
@@ -25,5 +25,12 @@ public class ProductUpdateRequest {
         this.productPrice = productPrice;
     }
 
+    public int getProductStock() {
+        return productStock;
+    }
+
+    public void setProductStock(int productStock) {
+        this.productStock = productStock;
+    }
 
 }
