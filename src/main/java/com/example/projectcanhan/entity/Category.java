@@ -1,5 +1,6 @@
 package com.example.projectcanhan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Category {
     private String categoryDescription;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
 

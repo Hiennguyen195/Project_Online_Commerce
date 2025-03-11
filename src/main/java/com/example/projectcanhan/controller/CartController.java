@@ -32,5 +32,6 @@ public class CartController {
     public ResponseEntity<List<CartItemDTO>> getCart(@PathVariable String userId) {
         return ResponseEntity.ok(cartService.getCart(userId));
     }
+
 }
 

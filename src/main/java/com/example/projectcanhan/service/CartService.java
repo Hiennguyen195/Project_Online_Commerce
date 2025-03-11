@@ -30,7 +30,7 @@ public class CartService {
     private CartRepository cartRepository;
 
     public CartItemDTO addToCart(String userId, Long productId, int quantity) {
-        Cart cart = getOrCreateCart(userId);
+        Cart cart = createCart(userId);
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -49,7 +49,7 @@ public class CartService {
 
     }
 
-    public Cart getOrCreateCart(String userId) {
+    public Cart createCart(String userId) {
         return cartRepository.findByUserId(userId)
                 .orElseGet(() -> {
                     Cart newCart = new Cart();
@@ -58,10 +58,6 @@ public class CartService {
                     return cartRepository.save(newCart);
                 });
     }
-
-//    public List<CartItemDTO> getCart(String userId) {
-//        return cartItemRepository.findCartItemsByUserId(userId);
-//    }
 
     public List<CartItemDTO> getCart(String userId) {
         User user = userRepository.findById(userId)

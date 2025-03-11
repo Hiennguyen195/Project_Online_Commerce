@@ -1,5 +1,6 @@
 package com.example.projectcanhan.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Cart {
     private List<CartItem> cartItems = new ArrayList<>();
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
